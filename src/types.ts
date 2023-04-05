@@ -1,3 +1,5 @@
+import { Tag } from "antd"
+
 export interface QuoteType {
     author: string,
     authorSlug:string,
@@ -8,3 +10,14 @@ export interface QuoteType {
     tags:string[],
     _id:string,
 }
+
+export type Tag = {
+    dateAdded:string,
+    dateModified:string,
+    name:string,
+    quoteCount:number
+    slug:string
+    _id:string
+}
+
+export type TagType = Tag[];

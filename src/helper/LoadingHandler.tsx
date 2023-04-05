@@ -1,4 +1,4 @@
-interface LoadingState  {
+export interface LoadingState  {
     loading:boolean,
 }
 
