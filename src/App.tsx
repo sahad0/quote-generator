@@ -1,5 +1,5 @@
 import React from 'react'
-import 'antd/dist/antd.min.js';
+import 'antd/dist/reset.css';
 import Navbar from './components/common/Navbar/Navbar'
 import { BrowserRouter, Route, RouterProvider, Routes } from 'react-router-dom'
 import Router from './Router'
@@ -9,8 +9,10 @@ import './index.css'
 export default function App() {
   return (
     <BrowserRouter>
-      <Navbar />
-      <Router />
+      <div className='h-screen'>
+        <Navbar />
+        <Router />
+      </div>
     </BrowserRouter>
      
   )
