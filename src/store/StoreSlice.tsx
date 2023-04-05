@@ -18,8 +18,14 @@ const storeSlice = createSlice({
     reducers: {
         AddController:(state, action:PayloadAction<QuoteType>)=>{
            
+            const flag = Boolean(state.value.quotes.find(obj => obj._id === action.payload._id));
+            if(!flag){
+                state.value.quotes = [...state.value.quotes,action.payload];
+            }
         },
         RemoveController:(state, action:PayloadAction<QuoteType>)=>{
+            
+            state.value.quotes = state.value.quotes.filter((k)=> k._id!==action.payload._id);
            
         },
 

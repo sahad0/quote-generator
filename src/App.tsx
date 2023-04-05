@@ -12,6 +12,8 @@ import storeReducer from './store/StoreSlice';
 import { Provider } from 'react-redux';
 import { PersistGate } from 'redux-persist/integration/react';
 import storage from 'redux-persist/lib/storage'
+import { ToastContainer } from 'react-toastify';
+
 
 const persistConfig = {
   key: 'root',
@@ -48,6 +50,7 @@ export type AppDispatch = typeof store.dispatch;
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <BrowserRouter>
+        <ToastContainer />
           <div className='h-screen'>
             <Navbar />
             <Router />

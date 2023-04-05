@@ -4,6 +4,8 @@ import { QuoteType, Tag, TagType } from '../types';
 import requestStatus, { initial_state } from '../helper/LoadingHandler';
 import Card from '../components/Card/Card';
 import { Button, Select } from 'antd';
+import { useAppSelector } from '../Hooks/Hooks';
+import { ToastContainer } from 'react-toastify';
 
 
 
@@ -11,11 +13,11 @@ export default function Home():JSX.Element {
 
   const [quotes,setQuotes] = useState<QuoteType[]>([]);
   const [tags,setTag] = useState<TagType>();
-
+  const {quotes:quotefromREdux} = useAppSelector((state)=>state.cart.store.value);
   const [eventReducer,setEventReducer] = useReducer(requestStatus,initial_state);
 
 
-  
+
 
 
   const randomFn = async()=>{
@@ -46,6 +48,9 @@ export default function Home():JSX.Element {
 
   return (
     <div className='flex flex-1 w-full h-fit flex-col' >
+            <ToastContainer />
+
+
       <Card quotes={quotes} />
       <div className='text-slate-950 justify-center flex items-center w-full'>
 
