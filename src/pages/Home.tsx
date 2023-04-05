@@ -1,5 +1,5 @@
 import axios, { AxiosResponse } from 'axios';
-import React, { useEffect, useReducer, useState } from 'react'
+import React, { MutableRefObject, useEffect, useReducer, useRef, useState } from 'react'
 import { QuoteType, Tag, TagType } from '../types';
 import requestStatus, { initial_state } from '../helper/LoadingHandler';
 import Card from '../components/Card/Card';
@@ -13,6 +13,8 @@ export default function Home():JSX.Element {
 
   const [quotes,setQuotes] = useState<QuoteType[]>([]);
   const [tags,setTag] = useState<TagType>();
+  const [value,setValue] = useState<string>('');
+  const buttonRef = useRef<HTMLButtonElement>(null);
   const {quotes:quotefromREdux} = useAppSelector((state)=>state.cart.store.value);
   const [eventReducer,setEventReducer] = useReducer(requestStatus,initial_state);
 
@@ -20,12 +22,18 @@ export default function Home():JSX.Element {
 
 
 
-  const randomFn = async()=>{
+  const randomFn = async():Promise<void>=>{
     try{
       setEventReducer({type:'loading'});
-      const {data} = await axios.get<QuoteType>(import.meta.env.VITE_API_URL+'/random');
+      if(value===''){
+        const {data} = await axios.get<QuoteType>(import.meta.env.VITE_API_URL+`/random?tags=`);
+        setQuotes((quotes)=>[...quotes,data]);
+      }
+      else{
+        const {data} = await axios.get<QuoteType>(import.meta.env.VITE_API_URL+`/random?tags=${value}`);
+        setQuotes((quotes)=>[...quotes,data]);
+      }
       const data1 = await axios.get<TagType>(import.meta.env.VITE_API_URL+'/tags');
-      setQuotes((quotes)=>[...quotes,data]);
       setTag(data1.data);
       setEventReducer({type:'success'});
     }
@@ -37,8 +45,17 @@ export default function Home():JSX.Element {
     
   }
   const handleChange = (value: string) => {
-    console.log(`selected ${value}`);
+    setValue(value);
   };
+  const ScrollToEnd = ()=>{
+    if (buttonRef.current) {
+      buttonRef.current.scrollIntoView({
+        behavior: "smooth"
+      });
+    }
+    
+  }
+
 
   useEffect(()=>{
     randomFn();
@@ -47,17 +64,17 @@ export default function Home():JSX.Element {
 
 
   return (
-    <div className='flex flex-1 w-full h-fit flex-col' >
+    <div className='flex flex-1 w-full h-fit flex-col scroll-smooth' >
             <ToastContainer />
 
 
-      <Card quotes={quotes} />
+      <Card quotes={quotes} setQuotes={setQuotes} randomFn={randomFn}/>
       <div className='text-slate-950 justify-center flex items-center w-full'>
 
       <Select
       size='large'
         loading={eventReducer?.loading ? true:false}
-        defaultValue="lucy"
+        defaultValue="Random"
         style={{ width: 120 }}
         onChange={handleChange}
         options={tags!==undefined ? 
@@ -71,7 +88,12 @@ export default function Home():JSX.Element {
       />
 
 
-      <button className="h-10 m-20 px-10 font-semibold rounded-md bg-black text-white" type="submit">
+                
+      <button ref={buttonRef} onClick={()=>{
+        setTimeout(()=>{
+          ScrollToEnd();
+        },500)
+        randomFn()}} className="h-10 m-20 px-10 font-semibold rounded-md bg-black text-white  bttn" type="submit">
           Generate More
         </button>
       </div>

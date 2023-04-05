@@ -18,7 +18,7 @@ export default function BookMark() {
 
         </div>
         
-        <Card quotes={quotes}/>
+        <Card quotes={quotes} />
 
     </div>
   )

@@ -1,4 +1,4 @@
-import React, { FC } from "react"
+import React, { Dispatch, FC, SetStateAction } from "react"
 import { QuoteType } from "../../types";
 import { Button, Spin } from "antd";
 import { useLocation } from "react-router-dom";
@@ -9,26 +9,37 @@ import { toast } from "react-toastify";
 
 interface AppProps {
     quotes:QuoteType[];
+    setQuotes?:Dispatch<SetStateAction<QuoteType[]>>,
+    randomFn?:()=>Promise<void>
 }
 
 
-const Card:FC<AppProps> = ({quotes,}):JSX.Element=>{
+const Card:FC<AppProps> = ({quotes,setQuotes,randomFn}):JSX.Element=>{
     
     const {pathname} = useLocation();
     const dispatch = useAppDispatch();
+
+
 
 
     const handleEvent = (quote:QuoteType):void=>{
 
         if(pathname==='/bookmarks'){
             dispatch(RemoveController(quote));
-            toast.error('Removed from Bookmarks',{position:'top-center'});
+            toast.error('Removed from Bookmarks',{position:'bottom-right'});
 
             
         }
         else{
             dispatch(AddController(quote));
-            toast.success('Added to Bookmarks',{position:'top-center'});
+            let updated = quotes.filter((k)=>k._id!==quote._id);
+            setQuotes && setQuotes(updated);
+            toast.success('Added to Bookmarks',{position:'bottom-right'});
+            if(randomFn!==undefined){
+                console.log("calling");
+                randomFn();
+
+            }
 
         }
 
