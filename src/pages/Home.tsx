@@ -89,7 +89,7 @@ export default function Home():JSX.Element {
 
 
                 
-      <button ref={buttonRef} onClick={()=>{
+      <button disabled={eventReducer?.loading ? true :false} ref={buttonRef} onClick={()=>{
         setTimeout(()=>{
           ScrollToEnd();
         },500)
