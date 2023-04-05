@@ -5,7 +5,7 @@ Installation
 
 To install the app, clone the repo and ```just yarn run dev```.
 
-Demo Link: 
+Demo Link: https://dreamy-lily-2ac62a.netlify.app/
 
 ScreenShots
 
