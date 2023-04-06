@@ -72,35 +72,40 @@ export default function Home():JSX.Element {
 
 
   return (
+    <>
     <div className='flex flex-1 w-full h-fit flex-col scroll-smooth' >
-            <ToastContainer />
-
-
+      <ToastContainer />
       <Card quotes={quotes} setQuotes={setQuotes} randomFn={randomFn}/>
-      <div className='text-slate-950 justify-center flex items-center w-full'>
-
-      <Select
-      size='large'
-        loading={eventReducer?.loading ? true:false}
-        defaultValue="Random"
-        style={{ width: 120 }}
-        onChange={handleChange}
-        options={tags!==undefined ? 
-          tags.map((k)=>(
-            {value:k.name,label:k.name}
-          ))
-          :
-          [
-            { value: 'jack', label: 'Jack' },
-          ]}
-      />
-
-
-                
-      <button disabled={eventReducer?.loading ? true :false} ref={buttonRef} onClick={()=>{setHandleScroll((k)=>!k),randomFn()}} className="h-10 m-20 px-10 font-semibold rounded-md bg-black text-white  bttn" type="submit">
-          Generate More
-        </button>
-      </div>
     </div>
+
+      <div className=' w-full flex justify-center items-center' >
+        <div className='w-5/6 flex justify-center items-center  m-10'>
+        <div >
+          <Select
+          size='large'
+            loading={eventReducer?.loading ? true:false}
+            defaultValue="Random"
+            style={{ width: 120 }}
+            onChange={handleChange}
+            options={tags!==undefined ? 
+              tags.map((k)=>(
+                {value:k.name,label:k.name}
+              ))
+              :
+              [
+                { value: 'jack', label: 'Jack' },
+              ]}
+          />
+        </div>
+
+
+        <div className='ml-5'>        
+          <button disabled={eventReducer?.loading ? true :false} ref={buttonRef} onClick={()=>{setHandleScroll((k)=>!k),randomFn()}} className="h-10  px-10 font-semibold rounded-md bg-black text-white  bttn" type="submit">
+              Generate More
+          </button>
+        </div>
+        </div>
+    </div>
+  </>
   )
 }
