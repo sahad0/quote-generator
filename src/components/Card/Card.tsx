@@ -35,7 +35,6 @@ const Card:FC<AppProps> = ({quotes,setQuotes,randomFn}):JSX.Element=>{
             setQuotes && setQuotes(updated);
             toast.success('Added to Bookmarks',{position:'bottom-right'});
             if(randomFn!==undefined){
-                console.log("calling");
                 randomFn();
 
             }

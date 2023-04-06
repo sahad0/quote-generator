@@ -10,7 +10,6 @@ export default function Router() {
 
   axios.defaults.baseURL = import.meta.env.API_URL;
 
-  // console.log(import.meta.env.API_URL);
 
   return (
     
