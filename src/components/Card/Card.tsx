@@ -1,4 +1,4 @@
-import React, { Dispatch, FC, SetStateAction } from "react"
+import React, { Dispatch, FC, SetStateAction, memo } from "react"
 import { QuoteType } from "../../types";
 import { Button, Spin } from "antd";
 import { useLocation } from "react-router-dom";
@@ -18,7 +18,6 @@ const Card:FC<AppProps> = ({quotes,setQuotes,randomFn}):JSX.Element=>{
     
     const {pathname} = useLocation();
     const dispatch = useAppDispatch();
-
 
 
 
