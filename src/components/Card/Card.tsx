@@ -48,20 +48,20 @@ const Card:FC<AppProps> = ({quotes,setQuotes,randomFn}):JSX.Element=>{
         <div  className="flex flex-col self-center items-center w-full ">
           {quotes.length>0 ? quotes.map((quotes,index)=>(
             ( 
-                <figure key={index} onClick={()=>handleEvent(quotes)}  className="sm:flex hover:cursor-pointer  md:flex drop-shadow-sm hover:bg-pink-100 hover:rounded-md bg-slate-100  sm:w-full md:w-4/6 lg:w-4/6 xl:w-3/6 2xl:w-3/6 rounded-xl p-8 md:p-0 sm:m-8  md:m-5 lg:m-5 xl:m-5 2xl:m-5 flex justify-between">
+                <figure key={index} onClick={()=>handleEvent(quotes)}  className="sm:flex hover:cursor-pointer  md:flex drop-shadow-sm hover:bg-pink-100 hover:rounded-md bg-slate-100  w-5/6  rounded-xl p-8 m-4 flex justify-between">
                     <div >
-                        <div className="pt-6 md:p-8 text-center md:text-left space-y-4">
-                        <blockquote>
-                            <p className="text-lg font-medium">
-                            {quotes.content}
-                            </p>
-                        </blockquote>
-                        <figcaption className="font-medium">
-                            <div className="text-sky-500 ">
-                            {quotes.author}
-                            </div>
-                        
-                        </figcaption>
+                        <div className="pt-6 md:p-8 text-center sm:text-left space-y-4">
+                            <blockquote>
+                                <p className="text-lg font-medium">
+                                {quotes.content}
+                                </p>
+                            </blockquote>
+                            <figcaption className="font-medium">
+                                <div className="text-sky-500 ">
+                                {quotes.author}
+                                </div>
+                            
+                            </figcaption>
                         </div>
                     </div>
                   
